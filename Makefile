@@ -1,4 +1,4 @@
 all: default.nix
 
-default.nix: hnix.cabal
+default.nix: dummy.cabal
 	cabal2nix --shell . > $@
