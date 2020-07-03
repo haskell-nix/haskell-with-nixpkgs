@@ -8,6 +8,6 @@ library
   hs-source-dirs:      src
   exposed-modules:     Dummy
   build-depends:       base,
-                       -- Needed for "withHoogle"
-                       HUnit >= 1.6.0.0
+                       -- At least some package needed for "withHoogle" to work
+                       HUnit
   default-language:    Haskell2010
