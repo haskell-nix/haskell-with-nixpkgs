@@ -21,8 +21,6 @@ git:
 
 env:
   global:
-    # NOTE: This is secure CACHIX_SIGNING_KEY=val, it is only available on project internal branches, so Cachix would push only there
-    - secure: "dm6I+M4+V+C7QMTpcSADdKPE633SvmToXZrTbZ7miNDGmMN+/SfHeN2ybi1+PW6oViMlbPN/7J/aEfiGjSJI8vLk72Y4uCWGmpSb8TXZLu6+whnxtZzzW8+z4tsM4048QJg7CF3N/25U8thRFgs3DqUub1Sf3nG9LrNWdz6ZcDQ="
     ###
     ### NOTE: This configuration uses `build.sh` interface, which uses `default.nix` interface, which exposes the Nixpkgs Haskell Lib interface.
     ###
@@ -33,7 +31,6 @@ env:
     #
     # - rev=nixos-unstable
     # - NIX_PATH="nixpkgs=https://github.com/nixos/nixpkgs/archive/$rev.tar.gz"
-    - project='hnix'
     - allowInconsistentDependencies='false'
     - doJailbreak='false'
     - doCheck='true'
@@ -61,6 +58,12 @@ env:
     - doBenchmark='false'
     - generateOptparseApplicativeCompletions='false'
     - executableNamesToShellComplete='[ "hnix" ]'
+    #
+    - withHoogle='false'
+    #
+    # NOTE: This is secure CACHIX_SIGNING_KEY=val, it is only available on project internal branches, so Cachix would push only there
+    - cachixAccount='hnix'
+    - secure: "dm6I+M4+V+C7QMTpcSADdKPE633SvmToXZrTbZ7miNDGmMN+/SfHeN2ybi1+PW6oViMlbPN/7J/aEfiGjSJI8vLk72Y4uCWGmpSb8TXZLu6+whnxtZzzW8+z4tsM4048QJg7CF3N/25U8thRFgs3DqUub1Sf3nG9LrNWdz6ZcDQ="
     #
     - ghcjsTmpLogFile='/tmp/ghcjsTmpLogFile.log'
     - ghcjsLogTailLength='10000'
@@ -120,9 +123,9 @@ script:
   #
   # Install Cachix client using Nix:
   - if [ "${TRAVIS_OS_NAME}" = "linux" ] || [ "${TRAVIS_OS_NAME}" = "osx" ]; then nix-env -iA cachix -f https://cachix.org/api/v1/install; fi
-  - cachix use "$project"
+  - cachix use "$cachixAccount"
   # If key is set - use Cachix push, else - proceed without it
-  - if [ ! "$CACHIX_SIGNING_KEY" = "" ]; then cachix push "$project" --watch-store& fi
+  - if [ ! "$CACHIX_SIGNING_KEY" = "" ]; then cachix push "$cachixAccount" --watch-store& fi
   #
   #
   # NOTE: Normal GHC build
