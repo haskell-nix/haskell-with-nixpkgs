@@ -1,4 +1,4 @@
-name:                dummy
+name:                replace
 version:             0.0.0.0
 
 build-type:          Simple
@@ -6,7 +6,7 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Dummy
+  exposed-modules:     Replace
   build-depends:       base,
                        -- At least some package needed for "withHoogle" to work
                        call-stack
