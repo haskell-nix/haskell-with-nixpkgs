@@ -1,1 +1,1 @@
-[![Nixpkgs, Linux, main](https://github.com/Anton-Latukha/haskell-with-nixpkgs/workflows/Nixpkgs,%20Linux,%20main/badge.svg)](https://github.com/Anton-Latukha/haskell-with-nixpkgs/actions?query=workflow%3A%22Nixpkgs%2C+Linux%2C+main%22)
+[![Nixpkgs, Linux, main](https://github.com/Anton-Latukha/haskell-with-nixpkgs/workflows/Nixpkgs,%20Linux,%20main/badge.svg)](https://github.com/Anton-Latukha/haskell-with-nixpkgs/actions?query=branch%3Amaster+workflow%3A%22Nixpkgs%2C+Linux%2C+main%22)
