@@ -1,2 +1,3 @@
 [![Nixpkgs, Linux, main](https://github.com/Anton-Latukha/haskell-with-nixpkgs/workflows/Nixpkgs,%20Linux,%20main/badge.svg)](https://github.com/Anton-Latukha/haskell-with-nixpkgs/actions?query=branch%3Amaster+workflow%3A%22Nixpkgs%2C+Linux%2C+main%22)
 [![Nixpkgs, Linux, additional](https://github.com/Anton-Latukha/haskell-with-nixpkgs/workflows/Nixpkgs,%20Linux,%20additional/badge.svg)](https://github.com/Anton-Latukha/haskell-with-nixpkgs/actions?query=branch%3Amaster+workflow%3A%22Nixpkgs%2C+Linux%2C+additional%22)
+[![Nixpkgs, Linux, GHCJS](https://github.com/Anton-Latukha/haskell-with-nixpkgs/workflows/Nixpkgs,%20Linux,%20GHCJS/badge.svg)](https://github.com/Anton-Latukha/haskell-with-nixpkgs/actions?query=branch%3Amaster+workflow%3A%22Nixpkgs%2C+Linux%2C+GHCJS%22)
