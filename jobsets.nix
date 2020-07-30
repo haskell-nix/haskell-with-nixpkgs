@@ -11,6 +11,10 @@ let
 in
 with pkgs.lib;
 let
+  ownerAcc = "haskell-nix";
+  ownerUrl = "https://github.com/${ownerAcc}";
+  projectName = "haskell-with-nixpkgs";
+  projectUrl = "${ownerUrl}/${projectName}";
   defaults = jobs: {
     inherit (jobs) description;
     enabled = 1;
@@ -20,7 +24,7 @@ let
     checkinterval = 120;
     enableemail = false;
     emailoverride = "";
-    nixexprinput = "hnix";
+    nixexprinput = projectName;
     nixexprpath = "release.nix";
     inputs = jobs.inputs // {
       nixpkgs = {
@@ -31,17 +35,17 @@ let
     };
   };
   branchJobset = branch: defaults {
-    description = "hnix-${branch}";
+    description = "${projectName}-${branch}";
     inputs = {
       hnix = {
-        value = "https://github.com/haskell-nix/hnix ${branch}";
+        value = "${projectUrl} ${branch}";
         type = "git";
         emailresponsible = false;
       };
     };
   };
   makePr = num: info: {
-    name = "hnix-pr-${num}";
+    name = "${projectName}-pr-${num}";
     value = defaults {
       description = "#${num}: ${info.title}";
       inputs = {
