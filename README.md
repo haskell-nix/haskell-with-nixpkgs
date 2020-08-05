@@ -4,7 +4,9 @@
 [![Nixpkgs, macOS](https://github.com/Anton-Latukha/haskell-with-nixpkgs/workflows/Nixpkgs,%20macOS/badge.svg)](https://github.com/Anton-Latukha/haskell-with-nixpkgs/actions?query=branch%3Amaster+workflow%3A%22Nixpkgs%2C+macOS%22)
 [![Hackage, Cabal, Linux](https://github.com/Anton-Latukha/haskell-with-nixpkgs/workflows/Hackage,%20Cabal,%20Linux/badge.svg)](https://github.com/Anton-Latukha/haskell-with-nixpkgs/actions?query=branch%3Amaster+workflow%3A%22Hackage%2C+Cabal%2C+Linux%22)
 
-Project that allows to integrate Haskell projects with Nix configuraton, tooling and Nixpkgs software ecosystem.
+(Soon would) Drop-in configuration and easy instructions to integrate Haskell projects with Nix and Nixpkgs software ecosystem.
+Provides Nixpkgs Haskell Lib API.
+Provides `build.sh` to simplify CI and local builds with loading of API settings from env.
 
 `master` - main dev branch, includes the sample engine Haskell project that demonstrates and tests the whole project.
 
