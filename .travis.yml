@@ -144,13 +144,3 @@ branches:
   only:
     - master
     - pending
-
-notifications:
-  webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/b0312b18473340459d3e
-    # Be silent about CI, until some PR started to pass CI succesfully.
-    on_success: change
-    # `master` status in on the front page badge.
-    on_failure: never
-    on_start: never
