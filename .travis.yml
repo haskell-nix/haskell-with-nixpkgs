@@ -144,3 +144,7 @@ branches:
   only:
     - master
     - pending
+
+
+notifications:
+  email: false
