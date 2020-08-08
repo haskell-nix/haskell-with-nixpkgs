@@ -1,14 +1,7 @@
 {
-# Default GHC for Nixpkgs by default, for current default and explicitly supported GHC versions https://search.nixos.org/packages?query=ghc&from=0&size=500&channel=unstable, Nixpkgs implicitly supports older minor versions also, until the configuration departs from compatibility with them.
+# Default GHC for Nixpkgs by default, for current default and explicitly supported GHCs https://search.nixos.org/packages?query=ghc&from=0&size=500&channel=unstable, Nixpkgs implicitly supports older minor versions also, until the configuration departs from compatibility with them.
 # Compiler in a form ghc8101 <- GHC 8.10.1, just remove spaces and dots
-  compiler    ? "ghc${
-    (
-      # Remove '.' from the string 8.8.4 -> 884
-      pkgs.lib.stringAsChars (c: if c == "." then "" else c)
-        # Get default GHC version,
-        (pkgs.lib.getVersion pkgs.haskellPackages.ghc)
-    )
-  }"
+  compiler    ? "default"
 
 # Deafult.nix is a unit package abstraciton that allows to abstract over packages even in monorepos:
 # Example: pass --arg cabalName --arg packageRoot "./subprojectDir", or map default.nix over a list of tiples for subprojects.
@@ -119,6 +112,20 @@
 
 let
 
+ getDefaultGHC = "ghc${
+    (
+      # Remove '.' from the string 8.8.4 -> 884
+      pkgs.lib.stringAsChars (c: if c == "." then "" else c)
+        # Get default GHC version,
+        (pkgs.lib.getVersion pkgs.haskellPackages.ghc)
+    )
+  }";
+
+ compilerPackage =
+   if ((compiler == "") || (compiler == "default"))
+     then getDefaultGHC
+     else compiler;
+
   # side-overlay = pkgs.fetchFromGitHub {
   #   owner = "replaceWithAccount";
   #   repo = "replaceWithRepo";
@@ -143,7 +150,7 @@ let
       else overlay;
   };
 
-  haskellPackages = pkgs.haskell.packages.${compiler}.override
+  haskellPackages = pkgs.haskell.packages.${compilerPackage}.override
     overrideHaskellPackages;
 
   # Application of functions from this list to the package in code here happens in the reverse order (from the tail). Some options depend on & override others, so if enabling options caused Nix error or not expected result - change the order, and please do not change this order without proper testing.
