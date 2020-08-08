@@ -1,6 +1,6 @@
 {
 # Compiler in a form ghc8101 == GHC 8.10.1, just remove spaces and dots
-#  2020-07-05: By default using default GHC for Nixpkgs, see https://search.nixos.org/packages?query=ghc&from=0&size=500&channel=unstable for current supported versions, Nixpkgs also implicitly continues to support older GHCs also, until they configuration departs from compatibility
+#  2020-07-05: Default GHC for Nixpkgs by default, for current default and explicitly supported GHC versions https://search.nixos.org/packages?query=ghc&from=0&size=500&channel=unstable, Nixpkgs implicitly supports older minor versions also, until the configuration departs from compatibility with them.
   compiler    ? "ghc884"
 
 # Deafult.nix is a unit package abstraciton that allows to abstract over packages even in monorepos:
