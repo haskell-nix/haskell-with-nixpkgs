@@ -13,7 +13,8 @@ set -Eexuo pipefail
 
 
 # NOTE: If vars not imported - init the vars with default values
-compiler=${compiler:-'ghc883'}
+# Non-set/passed ''/'default' compiler setting means currently default GHC of Nixpkgs ecosystem.
+compiler=${compiler:-'default'}
 
 packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
 cabalName=${cabalName:-'replace'}
@@ -152,6 +153,7 @@ if [ "$compiler" = "ghcjs" ]
 
     # Normal GHC build
     # GHC sometimes produces logs so big - that Travis terminates builds, so multiple --quiet
+    # If $compiler provided - use the setting - otherwise - default.
     nix-build \
       --quiet --quiet \
       --argstr compiler "$compiler" \
