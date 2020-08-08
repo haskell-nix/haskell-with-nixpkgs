@@ -1,6 +1,6 @@
 {
-# Compiler in a form ghc8101 == GHC 8.10.1, just remove spaces and dots
-#  2020-07-05: Default GHC for Nixpkgs by default, for current default and explicitly supported GHC versions https://search.nixos.org/packages?query=ghc&from=0&size=500&channel=unstable, Nixpkgs implicitly supports older minor versions also, until the configuration departs from compatibility with them.
+# Default GHC for Nixpkgs by default, for current default and explicitly supported GHC versions https://search.nixos.org/packages?query=ghc&from=0&size=500&channel=unstable, Nixpkgs implicitly supports older minor versions also, until the configuration departs from compatibility with them.
+# Compiler in a form ghc8101 <- GHC 8.10.1, just remove spaces and dots
   compiler    ? "ghc${
     (
       # Remove '.' from the string 8.8.4 -> 884
