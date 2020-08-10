@@ -72,17 +72,17 @@ env:
 # {os} x {jobs} + {jobs:include} - {jobs:exclude} = {build matrix}
 jobs:
   include:
-    - name: GHC 8.6.5, Linux
+    - name: Nixpkgs, GHC 8.6.5, Linux
       env:
         - compiler='ghc865'
         - linkWithGold='true'
       os: linux
       dist: bionic
-    - name: default GHC (8.8), macOS, Strict
+    - name: Nixpkgs, default GHC (8.8), macOS, Strict
       env:
         - buildStrictly='true'
       os: osx
-    - name: GHC 8.10.1, Linux, SDist, Optimize, Benchmark, Haddock, Shell Completions
+    - name: Nipkgs, GHC 8.10.1, Linux, SDist, Optimize, Benchmark, Haddock, Shell Completions
       env:
         - compiler='ghc8101'
         - buildFromSdist='true'
@@ -95,7 +95,7 @@ jobs:
         - generateOptparseApplicativeCompletions='false' #  2020-08-10: FIXME: Turn on when binary provided
       os: linux
       dist: bionic
-    - name: GHCJS, Linux
+    - name: Nixpkgs, GHCJS, Linux
       env:
         - compiler='ghcjs'
       os: linux
