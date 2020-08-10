@@ -35,4 +35,4 @@ jobs:
       with:
         name: ${{ env.cachixAccount }}
     - name: Determined Nix-build
-      run: ./silenced-lazy-ghcjs-build.sh
+      run: ./ghcjs-build.sh
