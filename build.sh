@@ -20,9 +20,11 @@ packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
 cabalName=${cabalName:-'replace'}
 useRev=${useRev:-'false'}
 rev=${rev:-'nixpkgs-unstable'}
+
 # Account in Cachix to use
 cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
-
+# If key not provided (branch is not inside the central repo) - init CACHIX_SIGNING_KEY as empty
+CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
 
 allowInconsistentDependencies=${allowInconsistentDependencies:-'false'}
 doJailbreak=${doJailbreak:-'false'}
@@ -66,9 +68,6 @@ withHoogle=${withHoogle:-'false'}
 ghcjsTmpLogFile=${ghcjsTmpLogFile:-'/tmp/ghcjsTmpLogFile.log'}
 # Length of the GHCJS log tail (<40000)
 ghcjsLogTailLength=${ghcjsLogTailLength:-'10000'}
-
-# If key not provided (branch is not inside the central repo) - init CACHIX_SIGNING_KEY as empty
-CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
 
 
 GHCJS_BUILD(){
