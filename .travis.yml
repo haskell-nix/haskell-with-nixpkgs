@@ -78,7 +78,7 @@ jobs:
         - linkWithGold='true'
       os: linux
       dist: bionic
-    - name: default GHC, macOS, Strict
+    - name: default GHC (8.8), macOS, Strict
       env:
         - buildStrictly='true'
       os: osx
