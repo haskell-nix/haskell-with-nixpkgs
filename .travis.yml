@@ -93,7 +93,7 @@ jobs:
         - doBenchmark='true'
         - disableOptimization='false'
         - enableDeadCodeElimination='true'
-        - generateOptparseApplicativeCompletions='true'
+        - generateOptparseApplicativeCompletions='false' #  2020-08-10: FIXME: Turn on when binary provided
       os: linux
       dist: bionic
     - name: GHCJS, Linux
