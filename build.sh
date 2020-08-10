@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# NOTE: Script for the CI builds, relies on `default.nix` interface, which exposes Nixpkgs Haskell Lib interface
+# NOTE: Script to easy import nix-build settings from env, useful for tooling env replication and the CI builds, relies on `default.nix` interface, which exposes Nixpkgs Haskell Lib interface
 
 # The most strict error checking requirements
 set -Eexuo pipefail
