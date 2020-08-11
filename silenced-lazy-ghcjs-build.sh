@@ -5,7 +5,7 @@
 # The most strict error checking requirements
 set -Eexuo pipefail
 
-compiler=${compiler:-'default'}
+compiler=${compiler:-'ghcjs'}
 
 packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
 cabalName=${cabalName:-'replace'}
