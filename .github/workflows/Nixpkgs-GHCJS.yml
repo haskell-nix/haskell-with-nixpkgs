@@ -13,12 +13,7 @@ env:
   useRev: "true"
   rev: "nixos-unstable"
   cachixAccount: "haskell-with-nixpkgs"
-  # GitHub secret
-  CACHIX_SIGNING_KEY: ${{ secrets.CACHIX_SIGNING_KEY }}
   linkWithGold: "true"
-  compiler: "ghcjs"
-  ghcjsTmpLogFile: "/tmp/ghcjsTmpLogFile.log"
-  ghcjsLogTailLength: "10000"
 
 jobs:
   build10:
