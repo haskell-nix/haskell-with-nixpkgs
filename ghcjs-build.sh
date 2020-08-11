@@ -5,25 +5,14 @@
 # The most strict error checking requirements
 set -Eexuo pipefail
 
-### NOTE: Section handles imports from env, these are settings for Nixpkgs.
-### They use the `default.nix` interface, which exposes expose most of the Nixpkgs Haskell.lib API: https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/lib.nix
-### Some of these options implicitly switch the dependent options.
-### Documentation of this settings is mosly in `default.nix`, since most settings it Nixpkgs related
-### Additional documentation is in Nixpkgs Haskell.lib: https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/lib.nix
-
-
-# NOTE: If vars not imported - init the vars with default values
-# Non-set/passed ''/'default' compiler setting means currently default GHC of Nixpkgs ecosystem.
-compiler=${compiler:-'default'}
+compiler=${compiler:-'ghcjs'}
 
 packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
 cabalName=${cabalName:-'replace'}
 useRev=${useRev:-'false'}
 rev=${rev:-'nixpkgs-unstable'}
 
-# Account in Cachix to use
 cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
-# If key not provided (branch is not inside the central repo) - init CACHIX_SIGNING_KEY as empty
 CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
 
 allowInconsistentDependencies=${allowInconsistentDependencies:-'false'}
@@ -58,11 +47,16 @@ doHyperlinkSource=${doHyperlinkSource:-'false'}
 doCoverage=${doCoverage:-'false'}
 doBenchmark=${doBenchmark:-'false'}
 generateOptparseApplicativeCompletions=${generateOptparseApplicativeCompletions:-'false'}
-# [ "binary1" "binary2" ] - should pass " quotes into Nix interpreter
 executableNamesToShellComplete=${executableNamesToShellComplete:-'[ "replaceWithExecutableName" ]'}
 
 
 withHoogle=${withHoogle:-'false'}
+
+# Log file to dump GHCJS build into
+ghcjsTmpLogFile=${ghcjsTmpLogFile:-'/tmp/ghcjsTmpLogFile.log'}
+# Length of the GHCJS log tail (<40000)
+ghcjsLogTailLength=${ghcjsLogTailLength:-'10000'}
+
 
 
 BUILD_PROJECT(){
@@ -70,15 +64,18 @@ BUILD_PROJECT(){
 
 IFS=$'\n\t'
 
-if [ ! "$compiler" = "ghcjs" ]
-   then
+if [ "$compiler" = "ghcjs" ]
+  then
 
-    # Normal GHC build
-    # GHC sometimes produces logs so big - that Travis terminates builds, so multiple --quiet
-    # If $compiler provided - use the setting - otherwise - default.
+    # GHCJS build
+    # By itself, GHCJS creates >65000 lines of log that are >4MB in size, so Travis terminates due to log size quota.
+    # nixbuild --quiet (x5) does not work on GHC JS build
+    # So there was a need to make it build.
+    # The solution is to silence the stdout
+    # But Travis then terminates on 10 min no stdout timeout
+    # so HACK: SILENT wrapper allows to surpress the huge log, while still preserves the Cachix caching ability in any case of the build
+    # On build failure outputs the last 10000 lines of log (that should be more then enough), and terminates
     nix-build \
-      --quiet --quiet \
-      --argstr compiler "$compiler" \
       --arg allowInconsistentDependencies "$allowInconsistentDependencies" \
       --arg doJailbreak "$doJailbreak" \
       --arg doCheck "$doCheck" \
@@ -105,7 +102,8 @@ if [ ! "$compiler" = "ghcjs" ]
       --arg doBenchmark "$doBenchmark" \
       --arg generateOptparseApplicativeCompletions "$generateOptparseApplicativeCompletions" \
       --arg executableNamesToShellComplete "$executableNamesToShellComplete" \
-      --arg withHoogle "$withHoogle"
+      --arg withHoogle "$withHoogle" \
+      "$compiler"
 
 fi
 }
@@ -114,8 +112,6 @@ MAIN() {
 
 
 # Overall it is useful to have in CI test builds the latest stable Nix
-# 2020-06-24: HACK: Do not ask why different commands on Linux and macOS. IDK, wished they we the same. These are the only commands that worked on according platforms right after the fresh Nix installer rollout.
-# 2020-07-06: HACK: GitHub Actions CI shown that nix-channel or nix-upgrade-nix do not work, there is probably some new rollout, shortcircuting for the time bing with || true
 (nix-channel --update && nix-env -u) || (sudo nix upgrade-nix) || true
 
 
@@ -144,3 +140,4 @@ nix-instantiate --eval -E 'with import <nixpkgs> {}; lib.version or lib.nixpkgsV
 
 # Run the entry function of the script
 MAIN
+

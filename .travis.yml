@@ -130,7 +130,7 @@ script:
   # so `SILENT` mode for it was created
   # and travis_wait 50 to wait on no outputs (otherwise Travis terminates build in 10 minutes as stale)
   # and `bash` wrapper so Travis parses `travis_wait` => `if; then; fi` line
-  - travis_wait 50 bash -c 'if [ "$compiler" = "ghcjs" ]; then ./build.sh; fi'
+  - travis_wait 50 bash -c 'if [ "$compiler" = "ghcjs" ]; then ./silenced-lazy-ghcjs-build.sh; fi'
   # NOTE: For GHCJS dump the last $ghcjsLogTailLength lines into CI out to see
   # Since build runs inside `travis_wait` - it was impossible to output log from it
   - if [ "$compiler" = "ghcjs" ]; then tail -n "$ghcjsLogTailLength" "$ghcjsTmpLogFile" && rm "$ghcjsTmpLogFile"; fi
