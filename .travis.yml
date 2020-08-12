@@ -29,7 +29,7 @@ env:
     ### Additional documentation is in Nixpkgs Haskell.lib: https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/lib.nix
     ###
     #
-    # - rev=nixos-unstable
+    - rev='nixos-unstable'
     # - NIX_PATH="nixpkgs=https://github.com/nixos/nixpkgs/archive/$rev.tar.gz"
     - allowInconsistentDependencies='false'
     - doJailbreak='false'
