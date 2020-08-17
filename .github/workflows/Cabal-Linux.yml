@@ -32,6 +32,6 @@ jobs:
       - uses: actions/setup-haskell@v1.1
         with:
           ghc-version: ${{ matrix.ghc }}
-      - run: cabal v2-configure --disable-optimization --enable-tests
+      - run: cabal v2-configure --disable-optimization --enable-tests --enable-deterministic
       - run: cabal v2-build
       - run: cabal v2-test
