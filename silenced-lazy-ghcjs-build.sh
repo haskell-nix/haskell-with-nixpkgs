@@ -1,55 +1,7 @@
 #!/usr/bin/env bash
 
-# NOTE: Script to easy import nix-build settings from env, useful for tooling env replication and the CI builds, relies on `default.nix` interface, which exposes Nixpkgs Haskell Lib interface
-
-# The most strict error checking requirements
-set -Eexuo pipefail
-
-export compiler=${compiler:-'ghcjs'}
-export rev=${rev:-'default'}
-
-export packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
-export cabalName=${cabalName:-'replace'}
-
-export cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
-export CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
-
-export allowInconsistentDependencies=${allowInconsistentDependencies:-'false'}
-export doJailbreak=${doJailbreak:-'false'}
-export doCheck=${doCheck:-'true'}
-
-export sdistTarball=${sdistTarball:-'false'}
-export buildFromSdist=${buildFromSdist:-'false'}
-
-export failOnAllWarnings=${failOnAllWarnings:-'false'}
-export buildStrictly=${buildStrictly:-'false'}
-
-export enableDeadCodeElimination=${enableDeadCodeElimination:-'false'}
-export disableOptimization=${disableOptimization:-'true'}
-export linkWithGold=${linkWithGold:-'false'}
-
-export enableLibraryProfiling=${enableLibraryProfiling:-'false'}
-export enableExecutableProfiling=${enableExecutableProfiling:-'false'}
-export doTracing=${doTracing:-'false'}
-export enableDWARFDebugging=${enableDWARFDebugging:-'false'}
-export doStrip=${doStrip:-'false'}
-
-export enableSharedLibraries=${enableSharedLibraries:-'true'}
-export enableStaticLibraries=${enableStaticLibraries:-'false'}
-export enableSharedExecutables=${enableSharedExecutables:-'false'}
-export justStaticExecutables=${justStaticExecutables:-'false'}
-export enableSeparateBinOutput=${enableSeparateBinOutput:-'false'}
-
-export checkUnusedPackages=${checkUnusedPackages:-'false'}
-export doHaddock=${doHaddock:-'false'}
-export doHyperlinkSource=${doHyperlinkSource:-'false'}
-export doCoverage=${doCoverage:-'false'}
-export doBenchmark=${doBenchmark:-'false'}
-export generateOptparseApplicativeCompletions=${generateOptparseApplicativeCompletions:-'false'}
-export executableNamesToShellComplete=${executableNamesToShellComplete:-'[ "replaceWithExecutableName" ]'}
-
-
-export withHoogle=${withHoogle:-'false'}
+source ./env-defaults.sh
+export compiler='ghcjs'
 
 # Log file to dump GHCJS build into
 ghcjsTmpLogFile=${ghcjsTmpLogFile:-'/tmp/ghcjsTmpLogFile.log'}
