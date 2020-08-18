@@ -8,7 +8,7 @@ BUILD_PROJECT(){
 IFS=$'\n\t'
 
 if [ ! "$compiler" = "ghcjs" ]
-   then
+  then
 
     # Normal GHC build
     # GHC sometimes produces logs so big - that Travis terminates builds, so multiple --quiet
@@ -44,6 +44,39 @@ if [ ! "$compiler" = "ghcjs" ]
       --arg generateOptparseApplicativeCompletions "$generateOptparseApplicativeCompletions" \
       --arg executableNamesToShellComplete "$executableNamesToShellComplete" \
       --arg withHoogle "$withHoogle"
+
+  else
+
+    nix-build \
+      --argstr rev "$rev" \
+      --arg allowInconsistentDependencies "$allowInconsistentDependencies" \
+      --arg doJailbreak "$doJailbreak" \
+      --arg doCheck "$doCheck" \
+      --arg sdistTarball "$sdistTarball" \
+      --arg buildFromSdist "$buildFromSdist" \
+      --arg failOnAllWarnings "$failOnAllWarnings" \
+      --arg buildStrictly "$buildStrictly" \
+      --arg enableDeadCodeElimination "$enableDeadCodeElimination" \
+      --arg disableOptimization "$disableOptimization" \
+      --arg linkWithGold "$linkWithGold" \
+      --arg enableLibraryProfiling "$enableLibraryProfiling" \
+      --arg enableExecutableProfiling "$enableExecutableProfiling" \
+      --arg doTracing "$doTracing" \
+      --arg enableDWARFDebugging "$enableDWARFDebugging" \
+      --arg doStrip "$doStrip" \
+      --arg doHyperlinkSource "$doHyperlinkSource" \
+      --arg enableSharedLibraries "$enableSharedLibraries" \
+      --arg enableStaticLibraries "$enableStaticLibraries" \
+      --arg enableSharedExecutables "$enableSharedExecutables" \
+      --arg justStaticExecutables "$justStaticExecutables" \
+      --arg checkUnusedPackages "$checkUnusedPackages" \
+      --arg doCoverage "$doCoverage" \
+      --arg doHaddock "$doHaddock" \
+      --arg doBenchmark "$doBenchmark" \
+      --arg generateOptparseApplicativeCompletions "$generateOptparseApplicativeCompletions" \
+      --arg executableNamesToShellComplete "$executableNamesToShellComplete" \
+      --arg withHoogle "$withHoogle" \
+      "$compiler"
 
 fi
 }
