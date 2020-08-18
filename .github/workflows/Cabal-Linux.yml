@@ -1,4 +1,5 @@
 name: "Hackage, Cabal, Linux"
+
 on:
   pull_request:
   push:
@@ -6,7 +7,10 @@ on:
       - master
   schedule:
     - cron: "45 02 * * *"
+
+
 jobs:
+
   build10:
     name: GHC
     runs-on: ubuntu-latest
