@@ -15,11 +15,10 @@ set -Eexuo pipefail
 # NOTE: If vars not imported - init the vars with default values
 # Non-set/passed ''/'default' compiler setting means currently default GHC of Nixpkgs ecosystem.
 compiler=${compiler:-'default'}
+rev=${rev:-'default'}
 
 packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
 cabalName=${cabalName:-'replace'}
-useRev=${useRev:-'false'}
-rev=${rev:-'nixpkgs-unstable'}
 
 # Account in Cachix to use
 cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
@@ -79,6 +78,7 @@ if [ ! "$compiler" = "ghcjs" ]
     nix-build \
       --quiet --quiet \
       --argstr compiler "$compiler" \
+      --argstr rev "$rev" \
       --arg allowInconsistentDependencies "$allowInconsistentDependencies" \
       --arg doJailbreak "$doJailbreak" \
       --arg doCheck "$doCheck" \

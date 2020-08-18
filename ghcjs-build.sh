@@ -6,11 +6,10 @@
 set -Eexuo pipefail
 
 compiler=${compiler:-'ghcjs'}
+rev=${rev:-'default'}
 
 packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
 cabalName=${cabalName:-'replace'}
-useRev=${useRev:-'false'}
-rev=${rev:-'nixpkgs-unstable'}
 
 cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
 CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
@@ -52,12 +51,6 @@ executableNamesToShellComplete=${executableNamesToShellComplete:-'[ "replaceWith
 
 withHoogle=${withHoogle:-'false'}
 
-# Log file to dump GHCJS build into
-ghcjsTmpLogFile=${ghcjsTmpLogFile:-'/tmp/ghcjsTmpLogFile.log'}
-# Length of the GHCJS log tail (<40000)
-ghcjsLogTailLength=${ghcjsLogTailLength:-'10000'}
-
-
 
 BUILD_PROJECT(){
 
@@ -67,15 +60,8 @@ IFS=$'\n\t'
 if [ "$compiler" = "ghcjs" ]
   then
 
-    # GHCJS build
-    # By itself, GHCJS creates >65000 lines of log that are >4MB in size, so Travis terminates due to log size quota.
-    # nixbuild --quiet (x5) does not work on GHC JS build
-    # So there was a need to make it build.
-    # The solution is to silence the stdout
-    # But Travis then terminates on 10 min no stdout timeout
-    # so HACK: SILENT wrapper allows to surpress the huge log, while still preserves the Cachix caching ability in any case of the build
-    # On build failure outputs the last 10000 lines of log (that should be more then enough), and terminates
     nix-build \
+      --argstr rev "$rev" \
       --arg allowInconsistentDependencies "$allowInconsistentDependencies" \
       --arg doJailbreak "$doJailbreak" \
       --arg doCheck "$doCheck" \

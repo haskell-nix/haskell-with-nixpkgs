@@ -6,11 +6,10 @@
 set -Eexuo pipefail
 
 compiler=${compiler:-'ghcjs'}
+rev=${rev:-'default'}
 
 packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
 cabalName=${cabalName:-'replace'}
-useRev=${useRev:-'false'}
-rev=${rev:-'nixpkgs-unstable'}
 
 cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
 CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
@@ -107,6 +106,7 @@ if [ "$compiler" = "ghcjs" ]
     # so HACK: SILENT wrapper allows to surpress the huge log, while still preserves the Cachix caching ability in any case of the build
     # On build failure outputs the last 10000 lines of log (that should be more then enough), and terminates
     SILENT nix-build \
+      --argstr rev "$rev" \
       --arg allowInconsistentDependencies "$allowInconsistentDependencies" \
       --arg doJailbreak "$doJailbreak" \
       --arg doCheck "$doCheck" \

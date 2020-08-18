@@ -2,27 +2,18 @@ name: "Nixpkgs, Linux, additional"
 
 
 on:
-  # On Git changes in PR
   pull_request:
-  # On Git changes of the master
   push:
     branches:
       - master
   schedule:
-    # Every day at 03:45
     - cron: "45 06 * * *"
 
 
 env:
-  ###
-  ### NOTE: This configuration uses `build.sh` interface, which uses `default.nix` interface, which exposes the Nixpkgs Haskell Lib interface.
-  ###
-  ### Documentation of this settings is mosly in `default.nix`, since most settings it Nixpkgs related
-  ### and the other part of keys explained in `build.sh`, since those address external procedures aound the builds.
-  ### Additional documentation is in Nixpkgs Haskell.lib: https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/lib.nix
-  ###
   rev: "nixos-unstable"
   cachixAccount: "haskell-with-nixpkgs"
+  CACHIX_SIGNING_KEY: ${{ secrets.CACHIX_SIGNING_KEY }}
   linkWithGold: "true"
 
 
