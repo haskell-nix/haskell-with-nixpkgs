@@ -105,36 +105,7 @@ if [ "$compiler" = "ghcjs" ]
     # But Travis then terminates on 10 min no stdout timeout
     # so HACK: SILENT wrapper allows to surpress the huge log, while still preserves the Cachix caching ability in any case of the build
     # On build failure outputs the last 10000 lines of log (that should be more then enough), and terminates
-    SILENT nix-build \
-      --argstr rev "$rev" \
-      --arg allowInconsistentDependencies "$allowInconsistentDependencies" \
-      --arg doJailbreak "$doJailbreak" \
-      --arg doCheck "$doCheck" \
-      --arg sdistTarball "$sdistTarball" \
-      --arg buildFromSdist "$buildFromSdist" \
-      --arg failOnAllWarnings "$failOnAllWarnings" \
-      --arg buildStrictly "$buildStrictly" \
-      --arg enableDeadCodeElimination "$enableDeadCodeElimination" \
-      --arg disableOptimization "$disableOptimization" \
-      --arg linkWithGold "$linkWithGold" \
-      --arg enableLibraryProfiling "$enableLibraryProfiling" \
-      --arg enableExecutableProfiling "$enableExecutableProfiling" \
-      --arg doTracing "$doTracing" \
-      --arg enableDWARFDebugging "$enableDWARFDebugging" \
-      --arg doStrip "$doStrip" \
-      --arg doHyperlinkSource "$doHyperlinkSource" \
-      --arg enableSharedLibraries "$enableSharedLibraries" \
-      --arg enableStaticLibraries "$enableStaticLibraries" \
-      --arg enableSharedExecutables "$enableSharedExecutables" \
-      --arg justStaticExecutables "$justStaticExecutables" \
-      --arg checkUnusedPackages "$checkUnusedPackages" \
-      --arg doCoverage "$doCoverage" \
-      --arg doHaddock "$doHaddock" \
-      --arg doBenchmark "$doBenchmark" \
-      --arg generateOptparseApplicativeCompletions "$generateOptparseApplicativeCompletions" \
-      --arg executableNamesToShellComplete "$executableNamesToShellComplete" \
-      --arg withHoogle "$withHoogle" \
-      "$compiler"
+    SILENT ./ghcjs-build.sh
 
 fi
 }
