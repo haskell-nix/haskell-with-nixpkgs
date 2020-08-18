@@ -5,51 +5,51 @@
 # The most strict error checking requirements
 set -Eexuo pipefail
 
-compiler=${compiler:-'ghcjs'}
-rev=${rev:-'default'}
+export compiler=${compiler:-'ghcjs'}
+export rev=${rev:-'default'}
 
-packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
-cabalName=${cabalName:-'replace'}
+export packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
+export cabalName=${cabalName:-'replace'}
 
-cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
-CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
+export cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
+export CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
 
-allowInconsistentDependencies=${allowInconsistentDependencies:-'false'}
-doJailbreak=${doJailbreak:-'false'}
-doCheck=${doCheck:-'true'}
+export allowInconsistentDependencies=${allowInconsistentDependencies:-'false'}
+export doJailbreak=${doJailbreak:-'false'}
+export doCheck=${doCheck:-'true'}
 
-sdistTarball=${sdistTarball:-'false'}
-buildFromSdist=${buildFromSdist:-'false'}
+export sdistTarball=${sdistTarball:-'false'}
+export buildFromSdist=${buildFromSdist:-'false'}
 
-failOnAllWarnings=${failOnAllWarnings:-'false'}
-buildStrictly=${buildStrictly:-'false'}
+export failOnAllWarnings=${failOnAllWarnings:-'false'}
+export buildStrictly=${buildStrictly:-'false'}
 
-enableDeadCodeElimination=${enableDeadCodeElimination:-'false'}
-disableOptimization=${disableOptimization:-'true'}
-linkWithGold=${linkWithGold:-'false'}
+export enableDeadCodeElimination=${enableDeadCodeElimination:-'false'}
+export disableOptimization=${disableOptimization:-'true'}
+export linkWithGold=${linkWithGold:-'false'}
 
-enableLibraryProfiling=${enableLibraryProfiling:-'false'}
-enableExecutableProfiling=${enableExecutableProfiling:-'false'}
-doTracing=${doTracing:-'false'}
-enableDWARFDebugging=${enableDWARFDebugging:-'false'}
-doStrip=${doStrip:-'false'}
+export enableLibraryProfiling=${enableLibraryProfiling:-'false'}
+export enableExecutableProfiling=${enableExecutableProfiling:-'false'}
+export doTracing=${doTracing:-'false'}
+export enableDWARFDebugging=${enableDWARFDebugging:-'false'}
+export doStrip=${doStrip:-'false'}
 
-enableSharedLibraries=${enableSharedLibraries:-'true'}
-enableStaticLibraries=${enableStaticLibraries:-'false'}
-enableSharedExecutables=${enableSharedExecutables:-'false'}
-justStaticExecutables=${justStaticExecutables:-'false'}
-enableSeparateBinOutput=${enableSeparateBinOutput:-'false'}
+export enableSharedLibraries=${enableSharedLibraries:-'true'}
+export enableStaticLibraries=${enableStaticLibraries:-'false'}
+export enableSharedExecutables=${enableSharedExecutables:-'false'}
+export justStaticExecutables=${justStaticExecutables:-'false'}
+export enableSeparateBinOutput=${enableSeparateBinOutput:-'false'}
 
-checkUnusedPackages=${checkUnusedPackages:-'false'}
-doHaddock=${doHaddock:-'false'}
-doHyperlinkSource=${doHyperlinkSource:-'false'}
-doCoverage=${doCoverage:-'false'}
-doBenchmark=${doBenchmark:-'false'}
-generateOptparseApplicativeCompletions=${generateOptparseApplicativeCompletions:-'false'}
-executableNamesToShellComplete=${executableNamesToShellComplete:-'[ "replaceWithExecutableName" ]'}
+export checkUnusedPackages=${checkUnusedPackages:-'false'}
+export doHaddock=${doHaddock:-'false'}
+export doHyperlinkSource=${doHyperlinkSource:-'false'}
+export doCoverage=${doCoverage:-'false'}
+export doBenchmark=${doBenchmark:-'false'}
+export generateOptparseApplicativeCompletions=${generateOptparseApplicativeCompletions:-'false'}
+export executableNamesToShellComplete=${executableNamesToShellComplete:-'[ "replaceWithExecutableName" ]'}
 
 
-withHoogle=${withHoogle:-'false'}
+export withHoogle=${withHoogle:-'false'}
 
 # Log file to dump GHCJS build into
 ghcjsTmpLogFile=${ghcjsTmpLogFile:-'/tmp/ghcjsTmpLogFile.log'}
