@@ -5,51 +5,51 @@
 # The most strict error checking requirements
 set -Eexuo pipefail
 
-compiler=${compiler:-'ghcjs'}
-rev=${rev:-'default'}
+export compiler=${compiler:-'ghcjs'}
+export rev=${rev:-'default'}
 
-packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
-cabalName=${cabalName:-'replace'}
+export packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
+export cabalName=${cabalName:-'replace'}
 
-cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
-CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
+export cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
+export CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
 
-allowInconsistentDependencies=${allowInconsistentDependencies:-'false'}
-doJailbreak=${doJailbreak:-'false'}
-doCheck=${doCheck:-'true'}
+export allowInconsistentDependencies=${allowInconsistentDependencies:-'false'}
+export doJailbreak=${doJailbreak:-'false'}
+export doCheck=${doCheck:-'true'}
 
-sdistTarball=${sdistTarball:-'false'}
-buildFromSdist=${buildFromSdist:-'false'}
+export sdistTarball=${sdistTarball:-'false'}
+export buildFromSdist=${buildFromSdist:-'false'}
 
-failOnAllWarnings=${failOnAllWarnings:-'false'}
-buildStrictly=${buildStrictly:-'false'}
+export failOnAllWarnings=${failOnAllWarnings:-'false'}
+export buildStrictly=${buildStrictly:-'false'}
 
-enableDeadCodeElimination=${enableDeadCodeElimination:-'false'}
-disableOptimization=${disableOptimization:-'true'}
-linkWithGold=${linkWithGold:-'false'}
+export enableDeadCodeElimination=${enableDeadCodeElimination:-'false'}
+export disableOptimization=${disableOptimization:-'true'}
+export linkWithGold=${linkWithGold:-'false'}
 
-enableLibraryProfiling=${enableLibraryProfiling:-'false'}
-enableExecutableProfiling=${enableExecutableProfiling:-'false'}
-doTracing=${doTracing:-'false'}
-enableDWARFDebugging=${enableDWARFDebugging:-'false'}
-doStrip=${doStrip:-'false'}
+export enableLibraryProfiling=${enableLibraryProfiling:-'false'}
+export enableExecutableProfiling=${enableExecutableProfiling:-'false'}
+export doTracing=${doTracing:-'false'}
+export enableDWARFDebugging=${enableDWARFDebugging:-'false'}
+export doStrip=${doStrip:-'false'}
 
-enableSharedLibraries=${enableSharedLibraries:-'true'}
-enableStaticLibraries=${enableStaticLibraries:-'false'}
-enableSharedExecutables=${enableSharedExecutables:-'false'}
-justStaticExecutables=${justStaticExecutables:-'false'}
-enableSeparateBinOutput=${enableSeparateBinOutput:-'false'}
+export enableSharedLibraries=${enableSharedLibraries:-'true'}
+export enableStaticLibraries=${enableStaticLibraries:-'false'}
+export enableSharedExecutables=${enableSharedExecutables:-'false'}
+export justStaticExecutables=${justStaticExecutables:-'false'}
+export enableSeparateBinOutput=${enableSeparateBinOutput:-'false'}
 
-checkUnusedPackages=${checkUnusedPackages:-'false'}
-doHaddock=${doHaddock:-'false'}
-doHyperlinkSource=${doHyperlinkSource:-'false'}
-doCoverage=${doCoverage:-'false'}
-doBenchmark=${doBenchmark:-'false'}
-generateOptparseApplicativeCompletions=${generateOptparseApplicativeCompletions:-'false'}
-executableNamesToShellComplete=${executableNamesToShellComplete:-'[ "replaceWithExecutableName" ]'}
+export checkUnusedPackages=${checkUnusedPackages:-'false'}
+export doHaddock=${doHaddock:-'false'}
+export doHyperlinkSource=${doHyperlinkSource:-'false'}
+export doCoverage=${doCoverage:-'false'}
+export doBenchmark=${doBenchmark:-'false'}
+export generateOptparseApplicativeCompletions=${generateOptparseApplicativeCompletions:-'false'}
+export executableNamesToShellComplete=${executableNamesToShellComplete:-'[ "replaceWithExecutableName" ]'}
 
 
-withHoogle=${withHoogle:-'false'}
+export withHoogle=${withHoogle:-'false'}
 
 # Log file to dump GHCJS build into
 ghcjsTmpLogFile=${ghcjsTmpLogFile:-'/tmp/ghcjsTmpLogFile.log'}
@@ -105,49 +105,12 @@ if [ "$compiler" = "ghcjs" ]
     # But Travis then terminates on 10 min no stdout timeout
     # so HACK: SILENT wrapper allows to surpress the huge log, while still preserves the Cachix caching ability in any case of the build
     # On build failure outputs the last 10000 lines of log (that should be more then enough), and terminates
-    SILENT nix-build \
-      --argstr rev "$rev" \
-      --arg allowInconsistentDependencies "$allowInconsistentDependencies" \
-      --arg doJailbreak "$doJailbreak" \
-      --arg doCheck "$doCheck" \
-      --arg sdistTarball "$sdistTarball" \
-      --arg buildFromSdist "$buildFromSdist" \
-      --arg failOnAllWarnings "$failOnAllWarnings" \
-      --arg buildStrictly "$buildStrictly" \
-      --arg enableDeadCodeElimination "$enableDeadCodeElimination" \
-      --arg disableOptimization "$disableOptimization" \
-      --arg linkWithGold "$linkWithGold" \
-      --arg enableLibraryProfiling "$enableLibraryProfiling" \
-      --arg enableExecutableProfiling "$enableExecutableProfiling" \
-      --arg doTracing "$doTracing" \
-      --arg enableDWARFDebugging "$enableDWARFDebugging" \
-      --arg doStrip "$doStrip" \
-      --arg doHyperlinkSource "$doHyperlinkSource" \
-      --arg enableSharedLibraries "$enableSharedLibraries" \
-      --arg enableStaticLibraries "$enableStaticLibraries" \
-      --arg enableSharedExecutables "$enableSharedExecutables" \
-      --arg justStaticExecutables "$justStaticExecutables" \
-      --arg checkUnusedPackages "$checkUnusedPackages" \
-      --arg doCoverage "$doCoverage" \
-      --arg doHaddock "$doHaddock" \
-      --arg doBenchmark "$doBenchmark" \
-      --arg generateOptparseApplicativeCompletions "$generateOptparseApplicativeCompletions" \
-      --arg executableNamesToShellComplete "$executableNamesToShellComplete" \
-      --arg withHoogle "$withHoogle" \
-      "$compiler"
+    SILENT ./ghcjs-build.sh
 
 fi
 }
 
 MAIN() {
-
-
-# Overall it is useful to have in CI test builds the latest stable Nix
-(nix-channel --update && nix-env -u) || (sudo nix upgrade-nix) || true
-
-
-# Report the Nixpkgs channel revision
-nix-instantiate --eval -E 'with import <nixpkgs> {}; lib.version or lib.nixpkgsVersion'
 
 
 # Secrets are not shared to PRs from forks
