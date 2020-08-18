@@ -12,6 +12,7 @@ on:
 env:
   rev: "nixos-unstable"
   cachixAccount: "haskell-with-nixpkgs"
+  CACHIX_SIGNING_KEY: ${{ secrets.CACHIX_SIGNING_KEY }}
   linkWithGold: "true"
 
 jobs:
