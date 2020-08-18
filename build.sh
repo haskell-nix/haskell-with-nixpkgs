@@ -81,18 +81,18 @@ GHCJS_BUILD(){
 BUILD_PROJECT(){
 
 
-IFS=$'\n\t'
+  IFS=$'\n\t'
 
-if [ ! "$compiler" = "ghcjs" ]
-  then
+  case "$compiler" in
+    ghcjs)
+      GHCJS_BUILD
+      return
+      ;;
+    *)
+      GHC_BUILD
+      ;;
+  esac
 
-    GHC_BUILD
-
-  else
-
-    GHCJS_BUILD
-
-fi
 }
 
 MAIN() {
