@@ -91,6 +91,10 @@ if [ "$compiler" = "ghcjs" ]
       --arg withHoogle "$withHoogle" \
       "$compiler"
 
+  else
+    >&2 echo "This is not a build file for '$compiler' build."
+    exit 1
+
 fi
 }
 
