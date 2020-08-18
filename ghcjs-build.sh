@@ -9,7 +9,6 @@ compiler=${compiler:-'ghcjs'}
 
 packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
 cabalName=${cabalName:-'replace'}
-useRev=${useRev:-'false'}
 rev=${rev:-'nixpkgs-unstable'}
 
 cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}

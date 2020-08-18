@@ -18,7 +18,6 @@ compiler=${compiler:-'default'}
 
 packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
 cabalName=${cabalName:-'replace'}
-useRev=${useRev:-'false'}
 rev=${rev:-'nixpkgs-unstable'}
 
 # Account in Cachix to use
