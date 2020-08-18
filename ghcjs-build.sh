@@ -6,10 +6,10 @@
 set -Eexuo pipefail
 
 compiler=${compiler:-'ghcjs'}
+rev=${rev:-'default'}
 
 packageRoot=${packageRoot:-'pkgs.nix-gitignore.gitignoreSource [ ] ./.'}
 cabalName=${cabalName:-'replace'}
-rev=${rev:-'nixpkgs-unstable'}
 
 cachixAccount=${cachixAccount:-'replaceWithProjectNameInCachix'}
 CACHIX_SIGNING_KEY=${CACHIX_SIGNING_KEY:-""}
