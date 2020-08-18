@@ -78,6 +78,7 @@ if [ ! "$compiler" = "ghcjs" ]
     nix-build \
       --quiet --quiet \
       --argstr compiler "$compiler" \
+      --argstr rev "$rev" \
       --arg allowInconsistentDependencies "$allowInconsistentDependencies" \
       --arg doJailbreak "$doJailbreak" \
       --arg doCheck "$doCheck" \
