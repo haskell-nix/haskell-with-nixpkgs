@@ -14,6 +14,12 @@ jobs:
     steps:
     - name: "Git checkout"
       uses: actions/checkout@v2
+    - name: "Local cache"
+      uses: actions/cache@v2
+      with:
+        path: |
+          /nix/store
+        key: ${{ runner.os }}-Nixpkgs-integration-test
     - name: "Install Nix"
       uses: cachix/install-nix-action@v11
       with:
