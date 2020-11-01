@@ -19,4 +19,4 @@ jobs:
       with:
         nix_path: "nixpkgs=channel:nixos-unstable"
     - name: "Run Nixpkgs integration test"
-      uses: Anton-Latukha/test-haskell-nixpkgs-integration-action@v0.9.28-alpha
+      uses: Anton-Latukha/test-haskell-nixpkgs-integration-action@v1
