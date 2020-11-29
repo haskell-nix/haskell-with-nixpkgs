@@ -63,6 +63,7 @@ jobs:
   build10:
     name: "NixOS-unstable channel, default GHC (8.8)"
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
     - name: "Git checkout"
       uses: actions/checkout@v2
@@ -83,6 +84,7 @@ jobs:
   build20:
     name: "Release-quality test, SDist, Optimizations, Benchmark, Haddock, GHC 8.10.1"
     runs-on: ubuntu-latest
+    continue-on-error: true
     # Matrix of builds for multiple subprojects in a monorepo
     strategy:
       matrix:
@@ -119,6 +121,7 @@ jobs:
   build30:
     name: "NixOS 20.03 stable channel, default GHC (8.8)"
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       rev: "nixos-20.03"
     steps:
@@ -142,6 +145,7 @@ jobs:
   build40:
     name: "Nix-shell & supplied locall project Hoogle DB"
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
     - name: "Git checkout"
       uses: actions/checkout@v2
