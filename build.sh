@@ -97,8 +97,6 @@ BUILD_PROJECT(){
 
 MAIN() {
 
-./upd-nix.sh
-
 # Secrets are not shared to PRs from forks
 # nix-build | cachix push <account> - uploads binaries, runs&works only in the branches of the main repository, so for PRs - else case runs
 

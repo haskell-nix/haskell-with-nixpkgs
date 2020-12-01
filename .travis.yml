@@ -84,7 +84,7 @@ jobs:
       os: osx
     - name: Nipkgs, GHC 8.10.1, Linux, SDist, Optimize, Benchmark, Haddock, Shell Completions
       env:
-        - compiler='ghc8101'
+        - compiler='ghc8102'
         - buildFromSdist='true'
         - linkWithGold='true'
         - doHaddock='true'
