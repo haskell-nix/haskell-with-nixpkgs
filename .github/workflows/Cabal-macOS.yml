@@ -53,9 +53,3 @@ jobs:
         run: cabal v2-build $cabalConfig
       - name: "Tests"
         run: cabal v2-test $cabalConfig
-      - name: "Haddock"
-        if: ${{ matrix.ghc == '8.10' }}
-        run: cabal v2-haddock $cabalConfig
-      - name: "Source distribution file"
-        if: ${{ matrix.ghc == '8.10' }}
-        run: cabal v2-sdist
