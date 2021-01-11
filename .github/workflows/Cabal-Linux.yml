@@ -8,6 +8,8 @@ on:
   schedule:
     - cron: "45 02 * * *"
 
+env:
+  cabalConfig: --enable-tests --enable-benchmarks --disable-optimization --enable-deterministic
 
 jobs:
 
